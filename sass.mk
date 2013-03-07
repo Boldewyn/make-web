@@ -20,7 +20,7 @@ ifdef SASS_USE_COMPASS
 		--output-style "$(SASS_STYLE)" \
 		"$<"
 else
-	sass --style $(SASS_STYLE) --force "$<:$@"
+	sass --update --style $(SASS_STYLE) --force "$<:$@"
 endif
 
 clean-sass:
