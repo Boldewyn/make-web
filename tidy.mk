@@ -2,14 +2,14 @@
 # Get and build an HTML5 enabled tidy build
 #
 # This can be used to validate HTML files on build. Include
-# the `test-tidy` target and set the variable HTML_TARGETS
+# the `test-tidy` target and set the variable TIDY_TARGETS
 # to list the HTML files to be tested.
 #
 
 TIDY_DIR ?= lib/tidy
 TIDY ?= $(TIDY_DIR)/bin/tidy
 TIDY_FLAGS ?= -e -q --drop-empty-elements no
-HTML_TARGETS ?=
+TIDY_TARGETS ?=
 
 .PHONY: build-tidy clean-tidy test-tidy
 
@@ -31,11 +31,14 @@ endif
 clean-tidy:
 	$(info * remove tidy)
 	@rm -fr "$(TIDY_DIR)"
+	# the default TIDY_DIR is placed in ./libs, which might now be
+	# empty
+	-rmdir "$(dirname $(TIDY_DIR))"
 
 # test a bundle of HTML files with tidy
-test-tidy: build-tidy $(HTML_TARGETS)
+test-tidy: build-tidy $(TIDY_TARGETS)
 	$(info * test markup)
-	@for html in $(HTML_TARGETS); do \
+	@for html in $(TIDY_TARGETS); do \
 		echo "  > $$html"; \
 		"$(TIDY)" $(TIDY_FLAGS) $$html; \
 	done
