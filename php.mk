@@ -4,6 +4,8 @@
 
 PHP_COMPOSER ?= bin/composer.phar
 PHP_SRC ?=
+PHP_PHPUNIT_FLAGS ?=
+PHP_PHPUNIT_ENTRY ?=
 
 .PHONY: build-php deps-php test-php
 
@@ -18,4 +20,7 @@ test-php: $(PHP_SRC)
 		php --syntax-check $$PHP; \
 	done ) | \
 		grep -v '^No syntax errors detected in '
+ifdef PHP_PHPUNIT_ENTRY
+	phpunit $(PHP_PHPUNIT_FLAGS) $(PHP_PHPUNIT_ENTRY)
+endif
 
