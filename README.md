@@ -46,21 +46,51 @@ to see instantly the validation results.
 
 ### 0make-web.mk
 
+This file serves as general purpose dummy. It’s main purpose is to allow you
+to do
+
+    include make-web/*
+
+in your Makefile and to utter a warning, if you do this before any of your own
+targets, thus setting the default target.
+
 ### css.mk
+
+These are CSS related targets. Set `CSS_SRC` to a list of CSS files, and the
+target `css` will grab them and minify them using
+[cssmin](https://github.com/jbleuzen/node-cssmin).
 
 ### images.mk
 
+This Makefile contains targets to optimize PNG, JPEG and GIF images.
+
 ### js.mk
+
+Build, concatenate and minify JavaScript files with this Makefile. There is
+support for [Bower](http://twitter.github.com/bower/) and
+[RequireJS](http://requirejs.org/) built right in.
 
 ### php.mk
 
+Handle PHP dependencies with [Composer](http://getcomposer.org) or test PHP
+files for syntax errors. You can run PHPUnit unit tests by specifying the unit
+test entry in `$(PHP_PHPUNIT_ENTRY)`.
+
 ### sass.mk
+
+Compile Sass files to CSS. You can set the output style with `$(SASS_STYLE)`.
+Add `SASS_USE_COMPASS = 1` to switch to the
+[Compass framework](http://compass-style.org/).
 
 ### tidy.mk
 
-### tpl.mk
+Validate HTML files. This Makefile fetches the [HTML5-enabled
+Tidy](https://github.com/w3c/tidy-html5) from Github.
 
 ### watch.mk
+
+Watch directories for changes and automatically start other make targets, if a
+file is modified.
 
 Documentation about `make`
 --------------------------
@@ -70,3 +100,17 @@ If you want to start with `make`, take a look at
 From there you should jump directly to the well-written
 [GNU make manual](http://www.gnu.org/software/make/manual/make.html). There
 is a [WikiBook](http://en.wikibooks.org/wiki/Make) dedicated to `make`.
+
+Copyright
+---------
+
+The Makefiles are put in the public domain. If this concept is not applicable
+in your country, the license is
+[CC0](http://creativecommons.org/publicdomain/zero/1.0/). Please note, that
+the files may load other software, that is distributed under different
+licenses. It’s your responsibility to adhere to them.
+
+Author
+------
+
+These Makefiles were written by [Manuel Strehl](http://www.manuel-strehl.de)
